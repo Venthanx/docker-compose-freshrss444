@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  freshrss:
+    container_name: freshrss
+    image: ghcr.io/linuxserver/freshrss
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.freshrss.rule=Host(`${FRESHRSS_DOMAIN}`)"
+      - "traefik.http.routers.freshrss.entrypoints=websecure"
+      - "traefik.http.routers.freshrss.tls.certresolver=${TLS_RESOLVER}"
+    volumes:
+      - config:/config
+    networks:
+      - proxy
+
+
+
+volumes:
+  config:
+
+
+networks:
+  proxy:
+    name: traefik_default
