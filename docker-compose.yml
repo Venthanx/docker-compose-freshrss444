@@ -12,7 +12,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.freshrss.rule=Host(`${FRESHRSS_DOMAIN}`)"
       - "traefik.http.routers.freshrss.entrypoints=websecure"
-      - "traefik.http.routers.freshrss.tls.certresolver=${TLS_RESOLVER}"
     volumes:
       - config:/config
     networks:
